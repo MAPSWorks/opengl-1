@@ -30,6 +30,12 @@
     <ClInclude Include="GIS.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="GisApp.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="GisWinApp.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
