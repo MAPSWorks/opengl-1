@@ -2,6 +2,7 @@
 #include "GisApp.hpp"
 #include <windows.h>
 #include <tchar.h>
+#include "GisGLContext.hpp"
 
 namespace GIS
 {
@@ -10,7 +11,7 @@ namespace GIS
 	public:
 		GisWinApp()
 		{
-			_hwnd = NULL;
+			_hWnd = NULL;
 		}
 
 		//创建窗口函数
@@ -38,14 +39,21 @@ namespace GIS
 				return false;
 			}
 
-			_hwnd = CreateWindow(_T("GIS.Map"), _T("GISMap"), WS_OVERLAPPEDWINDOW,
+			_hWnd = CreateWindow(_T("GIS.Map"), _T("GISMap"), WS_OVERLAPPEDWINDOW,
 				CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInst, nullptr);
-			if (NULL == _hwnd)
+			if (NULL == _hWnd)
 			{
 				return false;
 			}
-			ShowWindow(_hwnd, SW_SHOW);
-			UpdateWindow(_hwnd);
+			ShowWindow(_hWnd, SW_SHOW);
+			UpdateWindow(_hWnd);
+
+			HDISPLAY hDC = GetDC(_hWnd);
+			if (false == _context.init(_hWnd, hDC))
+			{
+				DestroyWindow(_hWnd);
+				return false;
+			}
 			return true;
 		}
 
@@ -60,10 +68,13 @@ namespace GIS
 				TranslateMessage(&msg);
 				DispatchMessage(&msg);
 			}
+
+			_context.shutdown();
 		}
 
 
-		HWND _hwnd;	//窗口句柄
+		HWND			_hWnd;	//窗口句柄
+		GisGLContext	_context;
 	protected:
 		static LRESULT CALLBACK wndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		{

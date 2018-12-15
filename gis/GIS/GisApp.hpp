@@ -1,5 +1,5 @@
 #pragma once
-
+#include "GisPlatform.hpp"
 
 namespace GIS
 {
@@ -8,7 +8,7 @@ namespace GIS
 	public:
 
 		//创建窗口函数
-		virtual bool createWindow(int width, int height, HINSTANCE hInst) = 0;
+		virtual bool createWindow(int width, int height, INSTANCE hInst) = 0;
 
 
 		virtual void main(int argc, char** argv) = 0;

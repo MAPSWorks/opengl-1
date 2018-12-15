@@ -36,6 +36,12 @@
     <ClInclude Include="GisWinApp.hpp">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="GisPlatform.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="GisGLContext.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
