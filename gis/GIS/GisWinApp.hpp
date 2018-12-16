@@ -60,16 +60,35 @@ namespace GIS
 		//入口函数
 		virtual void main(int argc, char** argv)
 		{
-			MSG msg;
-
+			MSG msg = { 0 };
+#if 0
 			// 主消息循环: 
 			while (GetMessage(&msg, nullptr, 0, 0))
 			{
 				TranslateMessage(&msg);
 				DispatchMessage(&msg);
 			}
-
+#else
+			while (WM_QUIT != msg.message)
+			{
+				if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
+				{
+					TranslateMessage(&msg);
+					DispatchMessage(&msg);
+				}
+				render();
+			}
+#endif
+			
 			_context.shutdown();
+		}
+
+		//绘制函数
+		void render()
+		{
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+			glClearColor(1, 0, 0, 1);
+			_context.swapBuffer();
 		}
 
 
