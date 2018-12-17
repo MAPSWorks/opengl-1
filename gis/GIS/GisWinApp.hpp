@@ -9,6 +9,11 @@ namespace GIS
 	class GisWinApp : public GisApp
 	{
 	public:
+
+		HWND			_hWnd;	//窗口句柄
+		GisGLContext	_context;
+
+
 		GisWinApp()
 		{
 			_hWnd = NULL;
@@ -40,7 +45,7 @@ namespace GIS
 			}
 
 			_hWnd = CreateWindow(_T("GIS.Map"), _T("GISMap"), WS_OVERLAPPEDWINDOW,
-				CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInst, nullptr);
+				CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInst, this);
 			if (NULL == _hWnd)
 			{
 				return false;
@@ -91,21 +96,14 @@ namespace GIS
 			_context.swapBuffer();
 		}
 
-
-		HWND			_hWnd;	//窗口句柄
-		GisGLContext	_context;
-	protected:
-		static LRESULT CALLBACK wndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+		LRESULT eventProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		{
 			switch (message)
 			{
-			case WM_COMMAND:
-			break;
 			case WM_PAINT:
 			{
 				PAINTSTRUCT ps;
 				HDC hdc = BeginPaint(hWnd, &ps);
-				// TODO: 在此处添加使用 hdc 的任何绘图代码...
 				EndPaint(hWnd, &ps);
 			}
 			break;
@@ -115,6 +113,37 @@ namespace GIS
 			default:
 				return DefWindowProc(hWnd, message, wParam, lParam);
 			}
+			return S_OK;
+		}
+		
+	protected:
+		static LRESULT CALLBACK wndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+		{
+			if (WM_CREATE == message)
+			{
+				LPCREATESTRUCT pCreateStruct = (LPCREATESTRUCT)lParam;
+				if (NULL != pCreateStruct)
+				{
+					GisWinApp* pApp = (GisWinApp*)pCreateStruct->lpCreateParams;
+					if (NULL != pApp)
+					{
+						SetWindowLongPtr(hWnd, GWL_USERDATA, (LONG_PTR)pApp);
+					}
+				}
+			}
+			else
+			{
+				GisWinApp* pApp = (GisWinApp*)GetWindowLongPtr(hWnd, GWL_USERDATA);
+				if (NULL != pApp)
+				{
+					pApp->eventProc(hWnd, message, wParam, lParam);
+				}
+				else
+				{
+					return DefWindowProc(hWnd, message, wParam, lParam);
+				}
+			}
+			
 			return S_OK;
 		}
 
