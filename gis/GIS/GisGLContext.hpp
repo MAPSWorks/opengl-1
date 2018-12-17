@@ -64,7 +64,7 @@ namespace GIS
 			{
 				return false;
 			}
-			//glewInit();
+			glewInit();
 			return true;
 		}
 

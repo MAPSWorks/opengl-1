@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="头文件\glew">
+      <UniqueIdentifier>{63d7f066-9230-46e0-a541-bd9e70107ac8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -42,6 +45,18 @@
     <ClInclude Include="GisGLContext.hpp">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="include\GL\eglew.h">
+      <Filter>头文件\glew</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GL\glew.h">
+      <Filter>头文件\glew</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GL\glxew.h">
+      <Filter>头文件\glew</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GL\wglew.h">
+      <Filter>头文件\glew</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -49,6 +64,9 @@
     </ClCompile>
     <ClCompile Include="GIS.cpp">
       <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="glew.c">
+      <Filter>头文件\glew</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

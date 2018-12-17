@@ -128,6 +128,7 @@ namespace GIS
 					if (NULL != pApp)
 					{
 						SetWindowLongPtr(hWnd, GWL_USERDATA, (LONG_PTR)pApp);
+						pApp->eventProc(hWnd, message, wParam, lParam);
 					}
 				}
 			}
@@ -136,7 +137,7 @@ namespace GIS
 				GisWinApp* pApp = (GisWinApp*)GetWindowLongPtr(hWnd, GWL_USERDATA);
 				if (NULL != pApp)
 				{
-					pApp->eventProc(hWnd, message, wParam, lParam);
+					return pApp->eventProc(hWnd, message, wParam, lParam);
 				}
 				else
 				{
@@ -144,7 +145,7 @@ namespace GIS
 				}
 			}
 			
-			return S_OK;
+			return DefWindowProc(hWnd, message, wParam, lParam);
 		}
 
 	};
