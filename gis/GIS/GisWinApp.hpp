@@ -3,6 +3,7 @@
 #include <windows.h>
 #include <tchar.h>
 #include "GisGLContext.hpp"
+#include "GisOpenGL.h"
 
 namespace GIS
 {
@@ -12,7 +13,7 @@ namespace GIS
 
 		HWND			_hWnd;	//´°¿Ú¾ä±ú
 		GisGLContext	_context;
-
+		GisOpenGL		_device;
 
 		GisWinApp()
 		{

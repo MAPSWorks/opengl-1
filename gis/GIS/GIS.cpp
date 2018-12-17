@@ -13,12 +13,18 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     UNREFERENCED_PARAMETER(hPrevInstance);
     UNREFERENCED_PARAMETER(lpCmdLine);
 
-	GIS::GisWinApp app;
-	if (false == app.createWindow(800, 600, hInstance))
+	GIS::GisWinApp* app = new GIS::GisWinApp();
+	if (NULL == app)
 	{
-		return 0;
+		return 1;
 	}
-	app.main(0, 0);
+	if (false == app->createWindow(800, 600, hInstance))
+	{
+		delete app;
+		return 2;
+	}
+	app->main(0, 0);
+	delete app;
 
 	return 0;
 }

@@ -13,8 +13,11 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="头文件\glew">
-      <UniqueIdentifier>{63d7f066-9230-46e0-a541-bd9e70107ac8}</UniqueIdentifier>
+    <Filter Include="glew">
+      <UniqueIdentifier>{14f6eb33-dfb2-47aa-b0c9-5d0e8f04fc9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="engine">
+      <UniqueIdentifier>{239c913f-06d4-49c6-9fdb-a8996fb4941d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -46,16 +49,19 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="include\GL\eglew.h">
-      <Filter>头文件\glew</Filter>
+      <Filter>glew</Filter>
     </ClInclude>
     <ClInclude Include="include\GL\glew.h">
-      <Filter>头文件\glew</Filter>
+      <Filter>glew</Filter>
     </ClInclude>
     <ClInclude Include="include\GL\glxew.h">
-      <Filter>头文件\glew</Filter>
+      <Filter>glew</Filter>
     </ClInclude>
     <ClInclude Include="include\GL\wglew.h">
-      <Filter>头文件\glew</Filter>
+      <Filter>glew</Filter>
+    </ClInclude>
+    <ClInclude Include="GisOpenGL.h">
+      <Filter>engine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -66,7 +72,10 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="glew.c">
-      <Filter>头文件\glew</Filter>
+      <Filter>glew</Filter>
+    </ClCompile>
+    <ClCompile Include="GisOpenGL.cpp">
+      <Filter>engine</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
