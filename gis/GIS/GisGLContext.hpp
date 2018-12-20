@@ -7,6 +7,15 @@ namespace GIS
 {
 	class GisGLContext
 	{
+	protected:
+		int			_format;
+		HWINDOW		_hWnd;
+		HDISPLAY	_hDC;
+		HGLRC		_hRC;
+	public:
+		int			_winWidth;
+		int			_winHeight;
+
 	public:
 		GisGLContext()
 		{
@@ -89,14 +98,7 @@ namespace GIS
 			SwapBuffers(_hDC);
 		}
 
-	protected:
-		int			_format;
-		HWINDOW		_hWnd;
-		HDISPLAY	_hDC;
-		HGLRC		_hRC;
-	public:
-		int			_winWidth;
-		int			_winHeight;
+	
 
 
 	private:

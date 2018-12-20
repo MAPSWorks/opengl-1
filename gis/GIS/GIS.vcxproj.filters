@@ -63,6 +63,18 @@
     <ClInclude Include="GisOpenGL.h">
       <Filter>engine</Filter>
     </ClInclude>
+    <ClInclude Include="GisFrame.hpp">
+      <Filter>engine</Filter>
+    </ClInclude>
+    <ClInclude Include="GisObject.hpp">
+      <Filter>engine</Filter>
+    </ClInclude>
+    <ClInclude Include="GisFrameMap.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="GisContext.hpp">
+      <Filter>engine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -76,6 +88,9 @@
     </ClCompile>
     <ClCompile Include="GisOpenGL.cpp">
       <Filter>engine</Filter>
+    </ClCompile>
+    <ClCompile Include="GisFrameMap.cpp">
+      <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

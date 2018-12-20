@@ -4,6 +4,8 @@
 #include <tchar.h>
 #include "GisGLContext.hpp"
 #include "GisOpenGL.h"
+#include "GisFrameMap.h"
+#include "GisContext.hpp"
 
 namespace GIS
 {
@@ -12,12 +14,15 @@ namespace GIS
 	public:
 
 		HWND			_hWnd;	//窗口句柄
-		GisGLContext	_context;
+		GisGLContext	_contextGL;
+		GisContext		_context;
 		GisOpenGL		_device;
+		GisFrame*		_frame;
 
 		GisWinApp()
 		{
-			_hWnd = NULL;
+			_hWnd	= NULL;
+			_frame	= NULL;
 		}
 
 		//创建窗口函数
@@ -55,7 +60,7 @@ namespace GIS
 			UpdateWindow(_hWnd);
 
 			HDISPLAY hDC = GetDC(_hWnd);
-			if (false == _context.init(_hWnd, hDC))
+			if (false == _contextGL.init(_hWnd, hDC))
 			{
 				DestroyWindow(_hWnd);
 				return false;
@@ -63,38 +68,59 @@ namespace GIS
 			return true;
 		}
 
+		/// <summary>
+		/// 创建框架
+		/// </summary>
+		virtual GisFrame* createFrame()
+		{
+			return new GisFrameMap(_context);
+		}
+
 		//入口函数
 		virtual void main(int argc, char** argv)
 		{
-			MSG msg = { 0 };
+			_frame = createFrame();
+			if (nullptr != _frame)
+			{
+				MSG msg = { 0 };
 #if 0
-			// 主消息循环: 
-			while (GetMessage(&msg, nullptr, 0, 0))
-			{
-				TranslateMessage(&msg);
-				DispatchMessage(&msg);
-			}
-#else
-			while (WM_QUIT != msg.message)
-			{
-				if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
+				// 主消息循环: 
+				while (GetMessage(&msg, nullptr, 0, 0))
 				{
 					TranslateMessage(&msg);
 					DispatchMessage(&msg);
 				}
-				render();
-			}
+#else
+				while (WM_QUIT != msg.message)
+				{
+					if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
+					{
+						TranslateMessage(&msg);
+						DispatchMessage(&msg);
+					}
+					render();
+				}
 #endif
+			}
 			
-			_context.shutdown();
+			
+			_contextGL.shutdown();
 		}
 
 		//绘制函数
 		void render()
 		{
-			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-			glClearColor(1, 0, 0, 1);
-			_context.swapBuffer();
+			if (nullptr == _frame)
+			{
+				return;
+			}
+
+			_frame->update(_context);
+			_frame->onFrameStart(_context);
+			_frame->onFrameEnd(_context);
+
+			
+			_contextGL.swapBuffer();
 		}
 
 		LRESULT eventProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
