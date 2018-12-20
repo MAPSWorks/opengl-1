@@ -127,6 +127,17 @@ namespace GIS
 		{
 			switch (message)
 			{
+			case WM_LBUTTONDOWN:
+				_frame->onLButtonDown(LOWORD(lParam), HIWORD(lParam));
+				break;
+			case WM_LBUTTONUP:
+				_frame->onLButtonUp(LOWORD(lParam), HIWORD(lParam));
+				break;
+			case WM_MOUSEMOVE:
+				_context._mouseX = LOWORD(lParam);
+				_context._mouseY = HIWORD(lParam);
+				_frame->onMouseMove(LOWORD(lParam), HIWORD(lParam));
+				break;
 			case WM_PAINT:
 			{
 				PAINTSTRUCT ps;

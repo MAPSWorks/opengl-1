@@ -1,9 +1,10 @@
 #pragma once
 #include "GisContext.hpp"
+#include "GisInput.hpp"
 
 namespace GIS
 {
-	class GisFrame
+	class GisFrame : public GisInput
 	{
 	public:
 		GisContext & _context;

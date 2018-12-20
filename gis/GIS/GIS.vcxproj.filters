@@ -75,6 +75,9 @@
     <ClInclude Include="GisContext.hpp">
       <Filter>engine</Filter>
     </ClInclude>
+    <ClInclude Include="GisInput.hpp">
+      <Filter>engine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

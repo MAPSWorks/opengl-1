@@ -32,5 +32,20 @@ namespace GIS
 
 	}
 
+	void GisFrameMap::onLButtonDown(int x, int y)
+	{
+
+	}
+
+	void GisFrameMap::onLButtonUp(int x, int y)
+	{
+
+	}
+
+	void GisFrameMap::onMouseMove(int x, int y)
+	{
+
+	}
+
 }
 
