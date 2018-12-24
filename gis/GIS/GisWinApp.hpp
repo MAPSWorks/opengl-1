@@ -6,10 +6,11 @@
 #include "GisOpenGL.h"
 #include "GisFrameMap.h"
 #include "GisContext.hpp"
+#include "GisThread.hpp"
 
 namespace GIS
 {
-	class GisWinApp : public GisApp
+	class GisWinApp : public GisApp, public GisThread
 	{
 	public:
 
@@ -18,11 +19,13 @@ namespace GIS
 		GisContext		_context;
 		GisOpenGL		_device;
 		GisFrame*		_frame;
+		bool			_threaRun;
 
 		GisWinApp()
 		{
 			_hWnd	= NULL;
 			_frame	= NULL;
+			_threaRun = true;
 		}
 
 		//创建窗口函数
@@ -82,8 +85,9 @@ namespace GIS
 			_frame = createFrame();
 			if (nullptr != _frame)
 			{
+				GisThread::start();
 				MSG msg = { 0 };
-#if 0
+#if 1
 				// 主消息循环: 
 				while (GetMessage(&msg, nullptr, 0, 0))
 				{
@@ -100,15 +104,16 @@ namespace GIS
 					}
 					render();
 				}
+				_contextGL.shutdown();
 #endif
 			}
 			
 			
-			_contextGL.shutdown();
+			
 		}
 
 		//绘制函数
-		void render()
+		virtual void render()
 		{
 			if (nullptr == _frame)
 			{
@@ -122,6 +127,40 @@ namespace GIS
 			
 			_contextGL.swapBuffer();
 		}
+
+		protected:
+			/// <summary>
+			/// 创建完成通知函数
+			/// </summary>
+			virtual bool onCreate()
+			{
+				if (true == _contextGL.init(_hWnd, GetDC(_hWnd)))
+				{
+					return true;
+				}
+				return false;
+			}
+
+			/// <summary>
+			/// 线程执行函数
+			/// </summary>
+			virtual bool onRun()
+			{
+				while (_threaRun)
+				{
+					render();
+				}
+				return false;
+			}
+
+			/// <summary>
+			/// 结束函数
+			/// </summary>
+			virtual bool onDestroy()
+			{
+				_contextGL.shutdown();
+				return false;
+			}
 
 		LRESULT eventProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		{

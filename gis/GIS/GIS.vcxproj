@@ -164,6 +164,7 @@
     <ClInclude Include="GisObject.hpp" />
     <ClInclude Include="GisOpenGL.h" />
     <ClInclude Include="GisPlatform.hpp" />
+    <ClInclude Include="GisThread.hpp" />
     <ClInclude Include="GisWinApp.hpp" />
     <ClInclude Include="include\GL\eglew.h" />
     <ClInclude Include="include\GL\glew.h" />

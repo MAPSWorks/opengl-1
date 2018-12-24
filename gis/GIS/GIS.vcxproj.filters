@@ -78,6 +78,9 @@
     <ClInclude Include="GisInput.hpp">
       <Filter>engine</Filter>
     </ClInclude>
+    <ClInclude Include="GisThread.hpp">
+      <Filter>engine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
