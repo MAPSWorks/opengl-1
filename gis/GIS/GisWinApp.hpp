@@ -85,7 +85,7 @@ namespace GIS
 			_frame = createFrame();
 			if (nullptr != _frame)
 			{
-				GisThread::start();
+				start();
 				MSG msg = { 0 };
 #if 1
 				// 主消息循环: 
@@ -185,6 +185,8 @@ namespace GIS
 			}
 			break;
 			case WM_DESTROY:
+				_threaRun = false;
+				join();
 				PostQuitMessage(0);
 				break;
 			default:
