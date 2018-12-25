@@ -77,6 +77,16 @@ namespace GIS
 			return true;
 		}
 
+		bool makeCurrent()
+		{
+			return wglMakeCurrent(_hDC, _hRC);
+		}
+
+		bool makeCurrentNone()
+		{
+			return wglMakeCurrent(0, 0);
+		}
+
 		void shutdown()
 		{
 			if (NULL != _hRC)

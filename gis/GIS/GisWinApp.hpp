@@ -7,6 +7,7 @@
 #include "GisFrameMap.h"
 #include "GisContext.hpp"
 #include "GisThread.hpp"
+#include <assert.h>
 
 namespace GIS
 {
@@ -62,6 +63,14 @@ namespace GIS
 			ShowWindow(_hWnd, SW_SHOW);
 			UpdateWindow(_hWnd);
 
+			HDISPLAY hDC = GetDC(_hWnd);
+			if (false == _contextGL.init(_hWnd, hDC))
+			{
+				DestroyWindow(_hWnd);
+				return false;
+			}
+			///解除与主线程绑定
+			_contextGL.makeCurrentNone();
 			return true;
 		}
 
@@ -128,11 +137,9 @@ namespace GIS
 			/// </summary>
 			virtual bool onCreate()
 			{
-				if (true == _contextGL.init(_hWnd, GetDC(_hWnd)))
-				{
-					return true;
-				}
-				return false;
+				bool res = _contextGL.makeCurrent();
+				assert(res);
+				return res;
 			}
 
 			/// <summary>
