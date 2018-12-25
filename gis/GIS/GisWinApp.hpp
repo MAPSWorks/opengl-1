@@ -62,12 +62,6 @@ namespace GIS
 			ShowWindow(_hWnd, SW_SHOW);
 			UpdateWindow(_hWnd);
 
-			HDISPLAY hDC = GetDC(_hWnd);
-			if (false == _contextGL.init(_hWnd, hDC))
-			{
-				DestroyWindow(_hWnd);
-				return false;
-			}
 			return true;
 		}
 
