@@ -7,6 +7,7 @@
 #include "GisFrameMap.h"
 #include "GisContext.hpp"
 #include "GisThread.hpp"
+#include "GisEvent.hpp"
 #include <assert.h>
 
 namespace GIS
@@ -21,12 +22,15 @@ namespace GIS
 		GisOpenGL		_device;
 		GisFrame*		_frame;
 		bool			_threaRun;
+		bool			_makeResult;
+		GisEvent		_event;
 
 		GisWinApp()
 		{
 			_hWnd	= NULL;
 			_frame	= NULL;
 			_threaRun = true;
+			_makeResult = false;
 		}
 
 		//创建窗口函数
@@ -88,7 +92,17 @@ namespace GIS
 			_frame = createFrame();
 			if (nullptr != _frame)
 			{
-				start();
+				GisThread::start();
+				_event.wait();
+
+				if (false == _makeResult)
+				{
+					_threaRun = false;
+					GisThread::join();
+					delete _frame;
+					_contextGL.shutdown();
+					return;
+				}
 				MSG msg = { 0 };
 #if 1
 				// 主消息循环: 
@@ -137,9 +151,10 @@ namespace GIS
 			/// </summary>
 			virtual bool onCreate()
 			{
-				bool res = _contextGL.makeCurrent();
-				assert(res);
-				return res;
+				_makeResult = _contextGL.makeCurrent();
+				assert(_makeResult);
+				_event.set();
+				return _makeResult;
 			}
 
 			/// <summary>
@@ -187,7 +202,7 @@ namespace GIS
 			break;
 			case WM_DESTROY:
 				_threaRun = false;
-				join();
+				GisThread::join();
 				PostQuitMessage(0);
 				break;
 			default:

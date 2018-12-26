@@ -157,6 +157,7 @@
     <ClInclude Include="GIS.h" />
     <ClInclude Include="GisApp.hpp" />
     <ClInclude Include="GisContext.hpp" />
+    <ClInclude Include="GisEvent.hpp" />
     <ClInclude Include="GisFrame.hpp" />
     <ClInclude Include="GisFrameMap.h" />
     <ClInclude Include="GisGLContext.hpp" />

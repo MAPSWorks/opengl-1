@@ -81,6 +81,9 @@
     <ClInclude Include="GisThread.hpp">
       <Filter>engine</Filter>
     </ClInclude>
+    <ClInclude Include="GisEvent.hpp">
+      <Filter>engine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
