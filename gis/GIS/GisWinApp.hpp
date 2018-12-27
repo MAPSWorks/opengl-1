@@ -83,6 +83,18 @@ namespace GIS
 		/// </summary>
 		virtual GisFrame* createFrame()
 		{
+			if (TRUE == IsWindow(_hWnd))
+			{
+				RECT rect;
+				GetClientRect(_hWnd, &rect);
+				_context._width = rect.right - rect.left;
+				_context._height = rect.bottom - rect.top;
+			}
+			else
+			{
+				_context._width = 64;
+				_context._height = 64;
+			}
 			return new GisFrameMap(_context);
 		}
 
@@ -199,7 +211,18 @@ namespace GIS
 				HDC hdc = BeginPaint(hWnd, &ps);
 				EndPaint(hWnd, &ps);
 			}
-			break;
+				break;
+			case WM_SIZE:
+			{
+				if (TRUE == IsWindow(_hWnd))
+				{
+					RECT rect;
+					GetClientRect(_hWnd, &rect);
+					_context._width = rect.right - rect.left;
+					_context._height = rect.bottom - rect.top;
+				}				
+			}
+				break;
 			case WM_DESTROY:
 				_threaRun = false;
 				GisThread::join();

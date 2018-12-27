@@ -82,6 +82,12 @@
       <Filter>engine</Filter>
     </ClInclude>
     <ClInclude Include="GisEvent.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="GisResourceMgr.hpp">
+      <Filter>engine</Filter>
+    </ClInclude>
+    <ClInclude Include="GisProgramLibrary.hpp">
       <Filter>engine</Filter>
     </ClInclude>
   </ItemGroup>

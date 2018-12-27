@@ -15,6 +15,27 @@ namespace GIS
 	}
 
 
+	bool GisProgram::initialize(GisOpenGL* device)
+	{
+		return true;
+	}
+
+	void GisProgram::destroy()
+	{
+		return;
+	}
+
+	void GisProgram::begin()
+	{
+
+	}
+
+
+	void GisProgram::end()
+	{
+
+	}
+
 	/////////////////////////////////////////////
 	GisOpenGL::GisOpenGL()
 	{

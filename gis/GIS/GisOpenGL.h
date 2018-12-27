@@ -33,6 +33,18 @@ namespace GIS
 	public:
 		GisProgram();
 		virtual ~GisProgram();
+
+	public:
+		virtual bool initialize(GisOpenGL* device);
+
+		virtual void destroy();
+
+		//使用shader
+		virtual void begin();
+		virtual void end();
+
+		//创建shader
+
 	};
 
 
