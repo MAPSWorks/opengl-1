@@ -1,4 +1,5 @@
 #pragma once
+#include "glm\gtc\matrix_transform.hpp"
 
 namespace GIS
 {
@@ -8,6 +9,8 @@ namespace GIS
 	{
 	public:
 		GisOpenGL* _device;
+
+		//资源管理者指针
 		GisResourceMgr* _resMgr;
 
 		/// 鼠标当前位置x
@@ -20,6 +23,6 @@ namespace GIS
 		int _height;
 
 		//2d屏幕投影矩阵
-		//matrix4r _screenPrj;
+		glm::mat4 _screenPrj;
 	};
 }

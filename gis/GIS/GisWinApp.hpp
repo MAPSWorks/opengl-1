@@ -8,6 +8,8 @@
 #include "GisContext.hpp"
 #include "GisThread.hpp"
 #include "GisEvent.hpp"
+#include "GisProgramLibrary.hpp"
+#include "GisResourceMgr.hpp"
 #include <assert.h>
 
 namespace GIS
@@ -19,6 +21,7 @@ namespace GIS
 		HWND			_hWnd;	//窗口句柄
 		GisGLContext	_contextGL;
 		GisContext		_context;
+		GisResourceMgr	_resMgr;
 		GisOpenGL		_device;
 		GisFrame*		_frame;
 		bool			_threaRun;
@@ -27,10 +30,12 @@ namespace GIS
 
 		GisWinApp()
 		{
-			_hWnd	= NULL;
-			_frame	= NULL;
-			_threaRun = true;
-			_makeResult = false;
+			_hWnd				= NULL;
+			_frame				= NULL;
+			_threaRun			= true;
+			_makeResult			= false;
+			_context._device	= &_device;
+			_context._resMgr	= &_resMgr;
 		}
 
 		//创建窗口函数
@@ -73,6 +78,8 @@ namespace GIS
 				DestroyWindow(_hWnd);
 				return false;
 			}
+			_device.initialize();
+			_context._resMgr->initialize(_context._device);
 			///解除与主线程绑定
 			_contextGL.makeCurrentNone();
 			return true;

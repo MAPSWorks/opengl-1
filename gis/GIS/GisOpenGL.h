@@ -52,7 +52,6 @@ namespace GIS
 	{
 	public:
 		char _vertexBuffer[1024 * 1024 * 8];	//顶点缓冲区
-
 		char _indexBuffer[1024 * 1024];			//索引缓冲区
 
 	public:
@@ -61,7 +60,23 @@ namespace GIS
 
 		void clear(unsigned int mask);
 		void clearColor(float red, float green, float blue, float alpha);
-		
+
+		void initialize();
+
+		bool createProgram(GisProgram& shaderPrg, const char* vs, const char* ps);
+		void destroyProgram(GisProgram& shaderPrg);
+		GLint getAttributeLocation(GLint program, const char* name);
+		GLint getUniformLocation(GLint program, const char* name);
+
+		void enableVertexAttribArray(GLint vertexAttribue);
+		void disableVertexAttribArray(GLint vertexAttribue);
+		void useProgram(GLint program);
+
+		void setUniformMatrix4fv(int index, int count, bool transpose, const float* value);
+		void setUniform4f(int index, float v0, float v1, float v2, float v3);
+
+		void attributePointer(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const GLvoid* ptr);
+		void drawArrays(GLenum mode, GLint first, GLsizei count);
 	};
 
 }

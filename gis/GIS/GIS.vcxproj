@@ -162,6 +162,7 @@
     <ClInclude Include="GisFrameMap.h" />
     <ClInclude Include="GisGLContext.hpp" />
     <ClInclude Include="GisInput.hpp" />
+    <ClInclude Include="GisMath.hpp" />
     <ClInclude Include="GisObject.hpp" />
     <ClInclude Include="GisOpenGL.h" />
     <ClInclude Include="GisPlatform.hpp" />
