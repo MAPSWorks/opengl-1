@@ -45,6 +45,7 @@ namespace GIS
 
 	void GisFrameMap::update(GisContext& context)
 	{
+		_context._device->setViewPort(0, 0, _context._width, context._height);
 		_context._screenPrj = glm::ortho(0.0f, (float)_context._width, (float)context._height, 0.0f, -1000.0f, 1000.0f);
 	}
 

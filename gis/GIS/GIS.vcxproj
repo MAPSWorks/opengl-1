@@ -161,6 +161,8 @@
     <ClInclude Include="GisFrame.hpp" />
     <ClInclude Include="GisFrameMap.h" />
     <ClInclude Include="GisGLContext.hpp" />
+    <ClInclude Include="GisImage.hpp" />
+    <ClInclude Include="GisImageLoader.h" />
     <ClInclude Include="GisInput.hpp" />
     <ClInclude Include="GisMath.hpp" />
     <ClInclude Include="GisObject.hpp" />
@@ -181,6 +183,9 @@
   <ItemGroup>
     <ClCompile Include="GIS.cpp" />
     <ClCompile Include="GisFrameMap.cpp" />
+    <ClCompile Include="GisImageLoader.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="GisOpenGL.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>

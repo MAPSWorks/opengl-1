@@ -93,6 +93,12 @@
     <ClInclude Include="GisMath.hpp">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="GisImage.hpp">
+      <Filter>engine</Filter>
+    </ClInclude>
+    <ClInclude Include="GisImageLoader.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -108,6 +114,9 @@
       <Filter>engine</Filter>
     </ClCompile>
     <ClCompile Include="GisFrameMap.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="GisImageLoader.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

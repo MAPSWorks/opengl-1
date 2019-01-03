@@ -58,6 +58,12 @@ namespace GIS
 		glClearColor(red, green, blue, alpha);
 	}
 
+	void GisOpenGL::setViewPort(int x, int y, int width, int height)
+	{
+		glViewport(0, 0, width, height);
+		return;
+	}
+
 	void GisOpenGL::initialize()
 	{
 		glEnable(GL_CULL_FACE);
@@ -181,6 +187,115 @@ namespace GIS
 	void GisOpenGL::drawArrays(GLenum mode, GLint first, GLsizei count)
 	{
 		glDrawArrays(mode, first, count);
+	}
+
+	Texture1d GisOpenGL::createTexture1D(int level, int internalfmt, 
+		int width, int border, int format, int type, const void* data)
+	{
+		Texture1d tex;
+		tex._width = width;
+
+		glGenTextures(1, &tex._texture);
+		glBindTexture(GL_TEXTURE_1D, tex._texture);
+
+		glTexParameteri(GL_TEXTURE_1D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_1D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+
+		glTexParameteri(GL_TEXTURE_1D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+
+		if (GL_COMPRESSED_RGBA_S3TC_DXT1_EXT == format)
+		{
+			glCompressedTexImage1D(GL_TEXTURE_1D, level, GL_COMPRESSED_RGBA_S3TC_DXT1_EXT, width, 0, width / 4, data);
+		}
+		else if (GL_COMPRESSED_RGBA_S3TC_DXT3_EXT == format)
+		{
+			glCompressedTexImage1D(GL_TEXTURE_1D, level, GL_COMPRESSED_RGBA_S3TC_DXT3_EXT, width, 0, width, data);
+		}
+		else if (GL_COMPRESSED_RGBA_S3TC_DXT5_EXT == format)
+		{
+			glCompressedTexImage1D(GL_TEXTURE_1D, level, GL_COMPRESSED_RGBA_S3TC_DXT5_EXT, width, 0, width, data);
+		}
+		else
+		{
+			glTexImage1D(GL_TEXTURE_1D, level, internalfmt, width, border, format, type, data);
+		}
+		return tex;
+	}
+
+	Texture2d GisOpenGL::createTexture2D(int level, int internalfmt,
+		int width, int height, int border, int format, int type, const void* data)
+	{
+		Texture2d tex;
+		tex._width	= width;
+		tex._height = height;
+
+		glGenTextures(1, &tex._texture);
+		glBindTexture(GL_TEXTURE_2D, tex._texture);
+
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+
+		if (GL_COMPRESSED_RGBA_S3TC_DXT1_EXT == format)
+		{
+			glCompressedTexImage2D(GL_TEXTURE_2D, level, GL_COMPRESSED_RGBA_S3TC_DXT1_EXT, width, height, 0, width / 4, data);
+		}
+		else if (GL_COMPRESSED_RGBA_S3TC_DXT3_EXT == format)
+		{
+			glCompressedTexImage2D(GL_TEXTURE_2D, level, GL_COMPRESSED_RGBA_S3TC_DXT3_EXT, width, height, 0, width, data);
+		}
+		else if (GL_COMPRESSED_RGBA_S3TC_DXT5_EXT == format)
+		{
+			glCompressedTexImage2D(GL_TEXTURE_2D, level, GL_COMPRESSED_RGBA_S3TC_DXT5_EXT, width, height, 0, width, data);
+		}
+		else
+		{
+			glTexImage2D(GL_TEXTURE_2D, level, internalfmt, width, height, border, format, type, data);
+		}
+		return tex;
+	}
+
+	Texture3d GisOpenGL::createTexture3D(int level, int internalfmt,
+		int width, int height, int depth, int border, int format, int type, const void* data)
+	{
+		Texture3d tex;
+		tex._width	= width;
+		tex._height = height;
+		tex._depth	= depth;
+
+		glGenTextures(1, &tex._texture);
+		glBindTexture(GL_TEXTURE_3D, tex._texture);
+
+		glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+
+		glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+
+		if (GL_COMPRESSED_RGBA_S3TC_DXT1_EXT == format)
+		{
+			glCompressedTexImage3D(GL_TEXTURE_3D, level, GL_COMPRESSED_RGBA_S3TC_DXT1_EXT, width, height, depth, 0, width / 4, data);
+		}
+		else if (GL_COMPRESSED_RGBA_S3TC_DXT3_EXT == format)
+		{
+			glCompressedTexImage3D(GL_TEXTURE_3D, level, GL_COMPRESSED_RGBA_S3TC_DXT3_EXT, width, height, depth, 0, width, data);
+		}
+		else if (GL_COMPRESSED_RGBA_S3TC_DXT5_EXT == format)
+		{
+			glCompressedTexImage3D(GL_TEXTURE_3D, level, GL_COMPRESSED_RGBA_S3TC_DXT5_EXT, width, height, depth, 0, width, data);
+		}
+		else
+		{
+			glTexImage3D(GL_TEXTURE_3D, level, internalfmt, width, height, depth, border, format, type, data);
+		}
+
+		return tex;
+	}
+
+	Texture3d GisOpenGL::createTexture2dArray(int width, int height, int layers, unsigned int fmt)
+	{
+		Texture3d tex;
+		return tex;
 	}
 
 }
